@@ -1,0 +1,27 @@
+{
+  "name": "my-promise",
+  "version": "1.0.0",
+  "description": "基础 Promise/A+ 规范实现 Promise",
+  "main": "my-promise.js",
+  "scripts": {
+    "test": "promises-aplus-tests my-promise"
+  },
+  "dependencies": {
+    "promises-aplus-tests": "^2.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/httpsxiao/my-promise.git"
+  },
+  "keywords": [
+    "promise",
+    "es6",
+    "mypromise"
+  ],
+  "author": "httpsxiao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/httpsxiao/my-promise/issues"
+  },
+  "homepage": "https://github.com/httpsxiao/my-promise#readme"
+}
