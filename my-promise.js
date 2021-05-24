@@ -81,6 +81,17 @@ class MyPromise {
     this.then(undefined, onReject)
   }
 
+  finally(onFinished) {
+    // 回调函数没有参数
+    this.then(value => {
+      onFinished()
+      return value
+    }, reason => {
+      onFinished()
+      return reason
+    })
+  }
+
   static resolve(value) {
     // 如果传入 MyPromise 就直接返回
     if (value instanceof MyPromise) {
@@ -99,7 +110,9 @@ class MyPromise {
     })
   }
 
-  static all(list) {
+  static all(iterator) {
+    const list = Array.from(iterator)
+
     return new MyPromise((resolve, reject) => {
       const result = []
       const length = list.length
@@ -123,7 +136,9 @@ class MyPromise {
     })
   }
 
-  static allSettled(list) {
+  static allSettled(iterator) {
+    const list = Array.from(iterator)
+
     return new MyPromise((resolve, reject) => {
       const result = []
       const length = list.length
@@ -157,8 +172,18 @@ class MyPromise {
     })
   }
 
-  static race(list) {
-    return new MyPromise((resolve, reject) => {})
+  static race(iterator) {
+    const list = Array.from(iterator)
+
+    return new MyPromise((resolve, reject) => {
+      list.forEach(promise => {
+        MyPromise.resolve(promise).then(value => {
+          resolve(value)
+        }, reason => {
+          reject(reason)
+        })
+      })
+    })
   }
 }
 
